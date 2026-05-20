@@ -17,7 +17,7 @@ const AssignmentCard = () => {
         </div>
 
         <div className="bg-gray-100 p-3 rounded-lg">
-          Networking Notes - Tuesday
+          Networking Notes - Wednesday  
         </div>
 
       </div>
