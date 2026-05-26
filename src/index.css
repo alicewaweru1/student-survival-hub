@@ -1,1 +1,120 @@
 @import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --sage-50: #f5f7f0;
+  --sage-100: #e5eddc;
+  --sage-300: #b8c9ad;
+  --sage-500: #7f957a;
+  --sage-700: #53634c;
+  --espresso-50: #f8efe9;
+  --espresso-100: #ecd5cb;
+  --espresso-500: #785347;
+  --espresso-700: #4a2e25;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f1ed 0%, #e8efe8 100%);
+  color: #1f241d;
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.panel {
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 60px -30px rgba(74, 46, 37, 0.35);
+  backdrop-filter: blur(12px);
+}
+
+.input {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid #d6dfd0;
+  background: #ffffff;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: #1f241d;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: #7f957a;
+  box-shadow: 0 0 0 4px rgba(217, 228, 209, 0.75);
+}
+
+.btn-primary {
+  border-radius: 1rem;
+  background: #4a2e25;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #35201a;
+}
+
+.btn-secondary {
+  border-radius: 1rem;
+  background: #e7efe1;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: #314230;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #dce8d2;
+}
+
+.btn-ghost {
+  border-radius: 1rem;
+  border: 1px solid #dbe2d5;
+  background: transparent;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: #314230;
+  transition: background-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: #f4f8f1;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.chip-sage {
+  background: #e7efe1;
+  color: #314230;
+}
+
+.chip-neutral {
+  background: #f5ede7;
+  color: #6f4434;
+}
+
+.chip-danger {
+  background: #f9e5df;
+  color: #8a3c2e;
+}
+
