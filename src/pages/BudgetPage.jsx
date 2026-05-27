@@ -73,12 +73,12 @@ const BudgetPage = () => {
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           <div className="rounded-2xl bg-[#eff3e9] p-4">
             <p className="text-sm text-[#51614f]">Balance</p>
-            <p className="mt-2 text-2xl font-bold text-[#1f241d]">${stats.balance.toFixed(0)}</p>
+            <p className="mt-2 text-2xl font-bold text-[#1f241d]">Ksh {stats.balance.toFixed(0)}</p>
           </div>
           <div className="rounded-2xl bg-[#f8eee8] p-4">
             <p className="text-sm text-[#6c544a]">Expenses</p>
-            <p className="mt-2 text-2xl font-bold text-[#4a2e25]">${stats.totalExpenses.toFixed(0)}</p>
-]          </div>
+            <p className="mt-2 text-2xl font-bold text-[#4a2e25]">Ksh {stats.totalExpenses.toFixed(0)}</p>
+          </div>
         </div>
       </motion.section>
 
@@ -92,7 +92,7 @@ const BudgetPage = () => {
                 <p className="text-sm text-[#51614f]">{entry.date}</p>
               </div>
               <span className={`rounded-full px-3 py-1 text-sm font-semibold ${entry.type === "income" ? "bg-[#e8f1e3] text-[#314230]" : "bg-[#f9e8db] text-[#6f4434]"}`}>
-                {entry.type === "income" ? "+" : "-"}ksh{entry.amount}
+                {entry.type === "income" ? "+" : "-"}Ksh {entry.amount}
               </span>
             </div>
           ))}

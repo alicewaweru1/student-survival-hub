@@ -13,8 +13,8 @@ const Dashboard = () => {
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatsCard title="Pending assignments" value={stats.pendingAssignments.toString()} subtitle="Keep your queue light" />
-        <StatsCard title="Balance" value={`$${stats.balance.toFixed(0)}`} subtitle="Savings vs spending" />
-        <StatsCard title="Energy" value={`${stats.averageEnergy}/5`} subtitle="Wellness average" />
+        <StatsCard title="Balance" value={`Ksh ${stats.balance.toFixed(0)}`} subtitle="Savings vs spending" />
+        <StatsCard title="Energy" value={` ${stats.averageEnergy}/5`} subtitle="Wellness average" />
         <StatsCard title="Habits" value={habits.length.toString()} subtitle="Daily rituals tracked" />
       </div>
 
