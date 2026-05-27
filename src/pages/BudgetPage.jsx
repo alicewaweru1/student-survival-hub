@@ -78,7 +78,7 @@ const BudgetPage = () => {
           <div className="rounded-2xl bg-[#f8eee8] p-4">
             <p className="text-sm text-[#6c544a]">Expenses</p>
             <p className="mt-2 text-2xl font-bold text-[#4a2e25]">${stats.totalExpenses.toFixed(0)}</p>
-          </div>
+]          </div>
         </div>
       </motion.section>
 
@@ -92,7 +92,7 @@ const BudgetPage = () => {
                 <p className="text-sm text-[#51614f]">{entry.date}</p>
               </div>
               <span className={`rounded-full px-3 py-1 text-sm font-semibold ${entry.type === "income" ? "bg-[#e8f1e3] text-[#314230]" : "bg-[#f9e8db] text-[#6f4434]"}`}>
-                {entry.type === "income" ? "+" : "-"}${entry.amount}
+                {entry.type === "income" ? "+" : "-"}ksh{entry.amount}
               </span>
             </div>
           ))}

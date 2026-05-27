@@ -3,9 +3,9 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 const STORAGE_KEY = "student-survival-hub-data";
 
 const seedProfile = {
-  name: "Amina Patel",
-  school: "Green Valley College",
-  major: "Business & Information Systems",
+  name: "Alice Waweru",
+  school: "Zindua University",
+  major: "Software Engineering",
   focus: "Finish the semester strong",
   theme: "sage",
 };
