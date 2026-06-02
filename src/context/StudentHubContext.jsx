@@ -3,112 +3,27 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 const STORAGE_KEY = "student-survival-hub-data";
 
 const seedProfile = {
-  name: "Alice Waweru",
-  school: "Zindua University",
-  major: "Software Engineering",
-  focus: "Finish the semester strong",
+  name: "",
+  school: "",
+  major: "",
+  focus: "",
   theme: "sage",
 };
 
 const seedData = {
-  assignments: [
-    {
-      id: "1",
-      title: "React Dashboard Sprint",
-      course: "Web Development",
-      dueDate: "2026-05-29",
-      priority: "High",
-      status: "Pending",
-      notes: "Complete the dashboard layout and local storage sync.",
-    },
-    {
-      id: "2",
-      title: "Economics Review Pack",
-      course: "Microeconomics",
-      dueDate: "2026-05-31",
-      priority: "Medium",
-      status: "In Progress",
-      notes: "Summarize chapters 4-6 and make a one-page cheat sheet.",
-    },
-    {
-      id: "3",
-      title: "Lab reflection",
-      course: "Biology Lab",
-      dueDate: "2026-06-02",
-      priority: "Low",
-      status: "Done",
-      notes: "Submit after feeding back from the mentor session.",
-    },
-  ],
-  events: [
-    {
-      id: "e1",
-      title: "Math tutorial",
-      date: "2026-05-27",
-      start: "09:00",
-      end: "10:00",
-      category: "Class",
-    },
-    {
-      id: "e2",
-      title: "Library focus block",
-      date: "2026-05-27",
-      start: "18:00",
-      end: "19:30",
-      category: "Study",
-    },
-    {
-      id: "e3",
-      title: "Budget check-in",
-      date: "2026-05-28",
-      start: "20:00",
-      end: "20:20",
-      category: "Life",
-    },
-  ],
-  budgets: [
-    { id: "b1", label: "Scholarship", type: "income", amount: 1200, date: "2026-05-01" },
-    { id: "b2", label: "Groceries", type: "expense", amount: 82, date: "2026-05-12" },
-    { id: "b3", label: "Transport", type: "expense", amount: 45, date: "2026-05-16" },
-    { id: "b4", label: "Textbook deposit", type: "expense", amount: 64, date: "2026-05-19" },
-  ],
-  notes: [
-    {
-      id: "n1",
-      title: "Exam checklist",
-      content: "Review past papers, organize formulas, and sleep before the final.",
-      tag: "study",
-      updatedAt: "2026-05-18",
-    },
-    {
-      id: "n2",
-      title: "Resource gems",
-      content: "Keep a short note on the best lecture recap videos and practice links.",
-      tag: "resources",
-      updatedAt: "2026-05-21",
-    },
-  ],
-  resources: [
-    { id: "r1", title: "Canva study templates", link: "https://www.canva.com", tag: "design" },
-    { id: "r2", title: "Khan Academy", link: "https://www.khanacademy.org", tag: "learning" },
-    { id: "r3", title: "Notion study planner", link: "https://www.notion.so", tag: "planning" },
-  ],
-  habits: [
-    { id: "h1", name: "Focus sprint", goal: 2, progress: 1, unit: "sessions", streak: 3 },
-    { id: "h2", name: "Hydration check", goal: 3, progress: 2, unit: "refills", streak: 5 },
-    { id: "h3", name: "Walk break", goal: 1, progress: 1, unit: "walk", streak: 2 },
-  ],
-  wellness: [
-    {
-      id: "w1",
-      date: "2026-05-24",
-      mood: "Calm",
-      energy: 4,
-      sleep: 7,
-      hydration: 2.5,
-      notes: "Short walk and quiet evening planning session.",
-    },
-  ],
+  auth: {
+    isAuthenticated: false,
+    username: "",
+  },
+  themeMode: "light",
+  timetable: [],
+  assignments: [],
+  events: [],
+  budgets: [],
+  notes: [],
+  resources: [],
+  habits: [],
+  wellness: [],
   profile: seedProfile,
 };
 
@@ -130,6 +45,9 @@ export const StudentHubProvider = ({ children }) => {
       setData({
         ...seedData,
         ...parsed,
+        auth: parsed.auth ?? seedData.auth,
+        themeMode: parsed.themeMode ?? seedData.themeMode,
+        timetable: parsed.timetable ?? seedData.timetable,
         assignments: parsed.assignments ?? seedData.assignments,
         events: parsed.events ?? seedData.events,
         budgets: parsed.budgets ?? seedData.budgets,
@@ -147,6 +65,62 @@ export const StudentHubProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }, [data]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = data.themeMode;
+  }, [data.themeMode]);
+
+  const login = (username, password) => {
+    if (!username || password.length < 4) {
+      return false;
+    }
+
+    setData((prev) => {
+      const isNewUser = prev.auth.username !== username;
+
+      return {
+        ...prev,
+        auth: {
+          isAuthenticated: true,
+          username,
+        },
+        profile: isNewUser
+          ? { ...seedProfile, name: username }
+          : { ...prev.profile, name: username },
+        timetable: isNewUser ? [] : prev.timetable,
+        assignments: isNewUser ? [] : prev.assignments,
+        events: isNewUser ? [] : prev.events,
+        budgets: isNewUser ? [] : prev.budgets,
+        notes: isNewUser ? [] : prev.notes,
+        resources: isNewUser ? [] : prev.resources,
+        habits: isNewUser ? [] : prev.habits,
+        wellness: isNewUser ? [] : prev.wellness,
+      };
+    });
+
+    return true;
+  };
+
+  const logout = () => {
+    setData((prev) => ({
+      ...prev,
+      auth: {
+        isAuthenticated: false,
+        username: "",
+      },
+      profile: {
+        ...prev.profile,
+        name: "",
+      },
+    }));
+  };
+
+  const toggleTheme = () => {
+    setData((prev) => ({
+      ...prev,
+      themeMode: prev.themeMode === "dark" ? "light" : "dark",
+    }));
+  };
 
   const addAssignment = (assignment) => {
     setData((prev) => ({
@@ -318,6 +292,11 @@ export const StudentHubProvider = ({ children }) => {
       value={{
         ...data,
         stats,
+        isLoggedIn: data.auth?.isAuthenticated,
+        darkMode: data.themeMode === "dark",
+        login,
+        logout,
+        toggleTheme,
         addAssignment,
         updateAssignmentStatus,
         deleteAssignment,

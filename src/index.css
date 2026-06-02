@@ -13,12 +13,34 @@
   --espresso-700: #4a2e25;
 }
 
+[data-theme="dark"] {
+  color-scheme: dark;
+  --midnight: #021622;
+  --slate-teal: #2c5c6f;
+  --soft-cyan: #79d2dd;
+  --light-grey: #d8e4ea;
+  --panel-bg: rgba(2, 22, 34, 0.92);
+  --input-bg: #0b1720;
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --button-primary: #2d7c8f;
+  --button-primary-hover: #1f6879;
+  --button-secondary: #16303b;
+  --button-secondary-hover: #224850;
+  --ghost-border: #3f5963;
+  --text: #e3f6f9;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   background: linear-gradient(180deg, #f5f1ed 0%, #e8efe8 100%);
   color: #1f241d;
   font-family: Inter, "Segoe UI", sans-serif;
+}
+
+[data-theme="dark"] body {
+  background: linear-gradient(180deg, var(--midnight) 0%, #16313b 100%);
+  color: var(--text);
 }
 
 #root {
@@ -37,6 +59,12 @@ body {
   backdrop-filter: blur(12px);
 }
 
+[data-theme="dark"] .panel {
+  background: var(--panel-bg);
+  border-color: var(--border-dark);
+  box-shadow: 0 20px 70px -35px rgba(0, 0, 0, 0.55);
+}
+
 .input {
   width: 100%;
   border-radius: 1rem;
@@ -49,9 +77,22 @@ body {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+[data-theme="dark"] .input {
+  background: var(--input-bg);
+  border-color: #3a5560;
+  color: var(--text);
+}
+
 .input:focus {
-  border-color: #7f957a;
-  box-shadow: 0 0 0 4px rgba(217, 228, 209, 0.75);
+  border-color: #79d2dd;
+  box-shadow: 0 0 0 6px rgba(121, 210, 221, 0.25);
+  background: #f8fdff;
+}
+
+[data-theme="dark"] .input:focus {
+  border-color: var(--soft-cyan);
+  box-shadow: 0 0 0 6px rgba(121, 210, 221, 0.25);
+  background: rgba(28, 52, 62, 0.92);
 }
 
 .btn-primary {
@@ -67,6 +108,15 @@ body {
   background: #35201a;
 }
 
+[data-theme="dark"] .btn-primary {
+  background: var(--button-primary);
+  color: var(--text);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: var(--button-primary-hover);
+}
+
 .btn-secondary {
   border-radius: 1rem;
   background: #e7efe1;
@@ -78,6 +128,15 @@ body {
 
 .btn-secondary:hover {
   background: #dce8d2;
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: var(--button-secondary);
+  color: var(--text);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background: var(--button-secondary-hover);
 }
 
 .btn-ghost {
@@ -93,6 +152,16 @@ body {
 .btn-ghost:hover {
   background: #f4f8f1;
 }
+
+[data-theme="dark"] .btn-ghost {
+  border-color: var(--ghost-border);
+  color: var(--text);
+}
+
+[data-theme="dark"] .btn-ghost:hover {
+  background: rgba(121, 210, 221, 0.08);
+}
+
 
 .chip {
   display: inline-flex;

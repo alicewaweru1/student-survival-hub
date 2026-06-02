@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useStudentHub } from "../context/StudentHubContext";
 
 const SettingsPage = () => {
-  const { profile, updateProfile, resetDemoData } = useStudentHub();
+  const navigate = useNavigate();
+  const { profile, updateProfile, resetDemoData, darkMode, toggleTheme, logout } = useStudentHub();
   const [form, setForm] = useState({
     name: profile.name,
     school: profile.school,
@@ -60,8 +62,23 @@ const SettingsPage = () => {
           <p className="mt-2 text-sm text-[#51614f]">All dashboard data is saved securely in your browser.</p>
         </div>
 
+        <button type="button" className="btn-secondary w-full" onClick={toggleTheme}>
+          Switch to {darkMode ? "light" : "dark"} mode
+        </button>
+
         <button type="button" className="btn-ghost mt-4 w-full" onClick={resetDemoData}>
           Reset demo data
+        </button>
+
+        <button
+          type="button"
+          className="btn-ghost mt-4 w-full"
+          onClick={() => {
+            logout();
+            navigate("/login", { replace: true });
+          }}
+        >
+          Log out
         </button>
       </motion.section>
     </div>
